@@ -15,25 +15,31 @@ MySed::MySed(const std::string& fileName) {
 	}
 }
 
-void replace(const std::string &line, const std::string& s1, const std::string& s2) {
+std::string replaceLine(const std::string &line, const std::string& s1, const std::string& s2) {
 	std::string repl;
 	int i = 0;
 	while (i < line.length()) {
-		if (line.length() < i + s1.length()) {
-			//TODO handle
-		}
+		if (line.length() < i + s1.length())
+			break;
 		if (line.substr(i, s1.length()) == s1)
 		{
-
+			repl += s2;
+			i += s1.length();
 		}
+		repl += (line[i]);
+		i++;
 	}
+	return repl;
 }
 
 void MySed::replace(const std::string& s1, const std::string& s2) {
-	ifs.clear();
 	std::string line;
+	ifs.clear();
 	while (ifs.good()) {
-		ifs >> line;
+		getline(ifs, line);
+		ofs << replaceLine(line, s1, s2);
+		if (ifs.good())
+			ofs << std::endl;
 	}
 }
 
