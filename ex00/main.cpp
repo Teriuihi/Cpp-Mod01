@@ -6,7 +6,7 @@ void randomChump( std::string name );
 int main() {
 	Zombie *z = newZombie("one");
 	z->announce();
-	randomChump("two");
 	delete z;
+	randomChump("two");
 	return (0);
 }
