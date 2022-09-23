@@ -1,18 +1,23 @@
 NAME=ex00
-CC=gcc
-CFLAGS=-Wall -Wextra -Werror -std=c++98
+CC=c++
+FLAGS=-Wall -Wextra -Werror -std=c++98
 RM=rm -f
 
 FILES=main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
-FILES_OBJ=$(FILES:%.cpp=%.o)
+HEADERS = Zombie.hpp
+
+OBJ=$(FILES:%.cpp=%.o)
+
+%.o: %.cpp $(HEADERS)
+	$(CC) $(FLAGS) -c $< -o $(<:.cpp=.o)
+
+$(NAME): $(OBJ) $(HEADERS)
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 
 all: $(NAME)
 
-$(NAME): $(FILES_OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(FILES_OBJ) -lstdc++
-
 clean:
-	$(RM) $(FILES_OBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
