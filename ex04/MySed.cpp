@@ -3,14 +3,14 @@
 
 MySed::MySed(const std::string& fileName) {
 	this->ifs.open(fileName);
-	this->ofs.open(fileName + ".replace");
-	std::string line;
 	if (!ifs.is_open()) {
-		std::cout << "Couldn't find file: [" << fileName << "].";
+		std::cout << "Couldn't find file: [" << fileName << "]." << std::endl;
 		return;
 	}
+
+    this->ofs.open(fileName + ".replace");
 	if (!ofs.is_open()) {
-		std::cout << "Couldn't create file: [" << fileName << ".replace].";
+		std::cout << "Couldn't create file: [" << fileName << ".replace]." << std::endl;
 		return;
 	}
 }
